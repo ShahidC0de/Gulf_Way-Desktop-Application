@@ -24,6 +24,13 @@ class Customfield extends StatelessWidget {
         fontSize: 16,
       ),
       controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Required field';
+        } else {
+          return null;
+        }
+      },
       decoration: InputDecoration(
         prefixIcon: Icon(icon, color: AppColors.darkBlue),
         labelText: labelText,

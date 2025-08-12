@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gulf_way/core/theme/app_theme.dart';
-import 'package:gulf_way/features/home/presentation/pages/home.dart';
+import 'package:gulf_way/features/dashboard/presentation/pages/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.whiteThemeMode,
-      home: HomePage(),
+      home: DashboardScreen(),
     );
   }
 }

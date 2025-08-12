@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gulf_way/core/theme/app_colors.dart';
 
 class HomeLengthyButton extends StatelessWidget {
+  final String title;
   final String imagePath;
   final IconData correspondingIcon;
   final VoidCallback onTap;
@@ -11,6 +12,7 @@ class HomeLengthyButton extends StatelessWidget {
     required this.imagePath,
     required this.correspondingIcon,
     required this.onTap,
+    required this.title,
   });
 
   @override
@@ -31,6 +33,14 @@ class HomeLengthyButton extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(imagePath, scale: 0.01),
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
