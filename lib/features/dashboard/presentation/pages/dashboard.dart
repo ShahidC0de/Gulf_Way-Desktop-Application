@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gulf_way/features/add_employe/presentation/pages/add_employ.dart';
-import 'package:gulf_way/features/dfdkjf/presentation/pages/view_employes.dart';
+import 'package:gulf_way/features/all_employees/presentation/pages/employes.dart';
 
 class DashboardScreen extends StatelessWidget {
   static route() => MaterialPageRoute(builder: (context) => DashboardScreen());
@@ -63,24 +63,25 @@ class DashboardScreen extends StatelessWidget {
                 dashboardCard(Icons.person_add, "ADD EMPLOYEE", () {
                   Navigator.push(context, AddEmployee.route());
                 }),
-                dashboardCard(Icons.history, "VIEW ATTENDANCE", () {
-                  EmployeePrinter.printEmployees(context, [
-                    {
-                      'name': 'Shahid Zada',
-                      'email': 'shahidzada@example.com',
-                      'position': 'Software Engineer',
-                    },
-                    {
-                      'name': 'John Doe',
-                      'email': 'johndoe@example.com',
-                      'position': 'Product Manager',
-                    },
-                    {
-                      'name': 'Alice Smith',
-                      'email': 'alicesmith@example.com',
-                      'position': 'UX Designer',
-                    },
-                  ]);
+                dashboardCard(Icons.history, "EMPLOYEES", () {
+                  // EmployeePrinter.printEmployees(context, [
+                  //   {
+                  //     'name': 'Shahid Zada',
+                  //     'email': 'shahidzada@example.com',
+                  //     'position': 'Software Engineer',
+                  //   },
+                  //   {
+                  //     'name': 'John Doe',
+                  //     'email': 'johndoe@example.com',
+                  //     'position': 'Product Manager',
+                  //   },
+                  //   {
+                  //     'name': 'Alice Smith',
+                  //     'email': 'alicesmith@example.com',
+                  //     'position': 'UX Designer',
+                  //   },
+                  // ]);
+                  Navigator.push(context, EmployeesList.route());
                 }),
                 dashboardCard(Icons.exit_to_app, "LEAVE REQUESTS", () {}),
                 dashboardCard(Icons.person, "PROFILE", () {}),

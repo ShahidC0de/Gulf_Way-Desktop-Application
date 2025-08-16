@@ -18,4 +18,14 @@ class AppTheme {
       enabledBorder: _border(AppColors.darkBlue, 2),
     ),
   );
+  static final normalTextStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
+  static final titleTextStyle = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
 }

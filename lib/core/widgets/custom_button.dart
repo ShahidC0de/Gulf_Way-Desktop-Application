@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gulf_way/core/theme/app_colors.dart';
 
+// ignore: must_be_immutable
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String buttonTitle;
+  double width;
+  double height;
 
-  const CustomButton({
+  CustomButton({
     super.key,
     required this.onPressed,
     required this.buttonTitle,
+    this.width = 255,
+    this.height = 50,
   });
 
   @override
@@ -23,7 +28,7 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shadowColor: Colors.transparent,
           backgroundColor: Colors.transparent,
-          fixedSize: const Size(255, 50),
+          fixedSize: Size(width, height),
         ),
         child: Text(buttonTitle),
       ),
