@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gulf_way/core/theme/app_colors.dart';
 import 'package:gulf_way/core/theme/app_theme.dart';
+import 'package:gulf_way/core/widgets/custom_button.dart';
+import 'package:gulf_way/features/add_employe/presentation/widgets/customfield.dart';
 
 class EditEmployee extends StatefulWidget {
-  // THE EMPLOYEE EDIT SCREEN TO EDIT IS THE NEW TASK......
   final Map<String, dynamic> employee;
 
   static route(Map<String, dynamic> employee) =>
@@ -17,10 +18,11 @@ class EditEmployee extends StatefulWidget {
 
 class _EditEmployeeState extends State<EditEmployee> {
   late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController phoneController;
+  late TextEditingController roomController;
+  late TextEditingController companyController;
   late TextEditingController designationController;
-  late TextEditingController salaryController;
+  late TextEditingController contactController;
+  late TextEditingController siteController;
 
   String? selectedDepartment;
 
@@ -28,37 +30,42 @@ class _EditEmployeeState extends State<EditEmployee> {
   void initState() {
     super.initState();
     nameController = TextEditingController(text: widget.employee['name']);
-    emailController = TextEditingController(text: widget.employee['roomNo']);
-    phoneController = TextEditingController(text: widget.employee['company']);
+    roomController = TextEditingController(text: widget.employee['roomNo']);
+    companyController = TextEditingController(text: widget.employee['company']);
     designationController = TextEditingController(
       text: widget.employee['designation'],
     );
-    salaryController = TextEditingController(
-      text: widget.employee['contactNo']?.toString(),
+    siteController = TextEditingController(
+      text: widget.employee['currentSite']?.toString(),
     );
-    selectedDepartment = widget.employee['contactNo'];
+    contactController = TextEditingController(
+      text: widget.employee['contact']?.toString(),
+    );
+    selectedDepartment = widget.employee['currentSite'];
   }
 
   @override
   void dispose() {
     nameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
+    roomController.dispose();
+    companyController.dispose();
     designationController.dispose();
-    salaryController.dispose();
+    siteController.dispose();
+    contactController.dispose();
     super.dispose();
   }
 
   void _saveChanges() {
     final updatedEmployee = {
       'name': nameController.text,
-      'email': emailController.text,
-      'phone': phoneController.text,
+      'roomNo': roomController.text,
+      'company': companyController.text,
       'designation': designationController.text,
-      'salary': salaryController.text,
+      'currentSite': siteController.text,
       'department': selectedDepartment,
+      'contact': contactController.text,
     };
-    Navigator.pop(context, updatedEmployee); // return updated employee
+    Navigator.pop(context, updatedEmployee);
   }
 
   @override
@@ -69,57 +76,87 @@ class _EditEmployeeState extends State<EditEmployee> {
           "Edit Employee",
           style: AppTheme.titleTextStyle.copyWith(color: AppColors.darkBlue),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextFormField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: "Name"),
+        child: Center(
+          child: Card(
+            color: Colors.white,
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-            TextFormField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: "Email"),
-            ),
-            TextFormField(
-              controller: phoneController,
-              decoration: const InputDecoration(labelText: "Phone"),
-            ),
-            DropdownButtonFormField<String>(
-              value: selectedDepartment,
-              decoration: const InputDecoration(labelText: "Department"),
-              items: ["HR", "IT", "Finance", "Sales"]
-                  .map(
-                    (dept) => DropdownMenuItem(value: dept, child: Text(dept)),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedDepartment = value;
-                });
-              },
-            ),
-            TextFormField(
-              controller: designationController,
-              decoration: const InputDecoration(labelText: "Designation"),
-            ),
-            TextFormField(
-              controller: salaryController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: "Salary"),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: _saveChanges,
-              icon: const Icon(Icons.save),
-              label: const Text("Save Changes"),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  // Profile avatar
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: AppColors.darkBlue.withOpacity(0.1),
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: AppColors.darkBlue,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Input fields
+                  Customfield(
+                    icon: Icons.person,
+                    controller: nameController,
+                    labelText: 'Employee Name',
+                  ),
+                  const SizedBox(height: 12),
+
+                  Customfield(
+                    icon: Icons.meeting_room,
+                    controller: roomController,
+                    labelText: 'Room No',
+                  ),
+                  const SizedBox(height: 12),
+
+                  Customfield(
+                    icon: Icons.work_outline,
+                    controller: designationController,
+                    labelText: 'Designation',
+                  ),
+                  const SizedBox(height: 12),
+
+                  Customfield(
+                    icon: Icons.apartment,
+                    controller: companyController,
+                    labelText: 'Company',
+                  ),
+                  const SizedBox(height: 12),
+
+                  Customfield(
+                    icon: Icons.phone,
+                    controller: contactController,
+                    labelText: "Contact",
+                  ),
+                  const SizedBox(height: 12),
+
+                  Customfield(
+                    icon: Icons.location_on,
+                    controller: siteController,
+                    labelText: "Current Site",
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Save button
+                  CustomButton(
+                    onPressed: _saveChanges,
+                    buttonTitle: "Save Changes",
+                    width: double.infinity,
+                    height: 50,
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
