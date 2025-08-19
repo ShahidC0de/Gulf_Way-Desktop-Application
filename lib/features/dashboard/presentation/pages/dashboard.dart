@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gulf_way/features/add_employe/presentation/pages/add_employ.dart';
 import 'package:gulf_way/features/all_employees/presentation/pages/employes.dart';
+import 'package:gulf_way/features/employee_attandance/presentation/pages/employee_attandance_page.dart';
 
 class DashboardScreen extends StatelessWidget {
   static route() => MaterialPageRoute(builder: (context) => DashboardScreen());
@@ -83,7 +84,9 @@ class DashboardScreen extends StatelessWidget {
                   // ]);
                   Navigator.push(context, EmployeesList.route());
                 }),
-                dashboardCard(Icons.exit_to_app, "LEAVE REQUESTS", () {}),
+                dashboardCard(Icons.present_to_all, "ATTENDANCE", () {
+                  Navigator.push(context, EmployeeAttendancePage.route());
+                }),
                 dashboardCard(Icons.person, "PROFILE", () {}),
               ],
             );
